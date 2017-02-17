@@ -57,6 +57,8 @@ public:
                      const b2Color &color);
     void DrawTransform(const b2Transform &xf);
 
+    void DrawParticles(const b2Vec2 *centers, float32 radius, const b2ParticleColor *colors, int32 count);
+
     void setAxisScale(qreal axisScale);
 
 private:
@@ -240,6 +242,20 @@ void DebugDraw::DrawTransform(const b2Transform &xf)
     geometryY->vertexDataAsPoint2D()[1].set(p2.x(), p2.y());
 
     createNode(geometryY, Qt::yellow);
+}
+
+void DebugDraw::DrawParticles(const b2Vec2 *centers, float32 radius, const b2ParticleColor *colors, int32 count)
+{
+
+   for(int particleCount = 0; particleCount < count; particleCount++ ) {
+       b2Vec2 currentCenter = *(centers + particleCount);
+       b2Color currentColor(0.5f, 0.8f, 0.8f);
+   
+       DrawCircle( currentCenter, radius, currentColor);
+    //    DrawSolidCircle(currentCenter, radius, b2Vec2(0,0),currentColor);
+       currentCenter = *(centers + particleCount);
+    //    currentColor = GetColor(*(colors + particleCount));
+   }
 }
 
 void DebugDraw::setAxisScale(qreal axisScale)

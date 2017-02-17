@@ -415,6 +415,35 @@ inline float toRadians(float degrees)
     return -degrees * b2_pi / 180;
 }
 
+/**
+ * Unwinds an angle to range [0, 2PI[
+ */
+inline float unwind(float angle)
+{
+    float two_pi = 2 * b2_pi;
+    while(true) {
+        if (angle >= two_pi) {
+            angle -= two_pi;
+        } else if (angle < 0) {
+            angle += two_pi;
+        } else {
+            return angle;
+        }
+    }
+}
+
+/**
+ * Finds angular difference between two angles
+ */
+inline float angleBetween(float a, float b) {
+    float angle = unwind(a) - unwind(b);
+    if (angle > b2_pi)
+        angle -= 2*b2_pi;
+    else if (angle < -b2_pi)
+        angle += 2*b2_pi;
+    return angle;
+}
+
 
 QML_DECLARE_TYPE(Box2DWorld)
 

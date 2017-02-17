@@ -47,7 +47,8 @@ public:
         AABB = 4,
         Pair = 8,
         CenterOfMass = 16,
-        Everything = 31
+        Particles = 32,
+        Everything = 63
     };
     explicit Box2DDebugDraw(QQuickItem *parent = 0);
 

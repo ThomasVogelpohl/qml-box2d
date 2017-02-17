@@ -18,6 +18,7 @@ SOURCES += \
     $$PWD/Common/b2Settings.cpp \
     $$PWD/Common/b2Math.cpp \
     $$PWD/Common/b2Draw.cpp \
+    $$PWD/Common/b2TrackedBlock.cpp \
     $$PWD/Common/b2BlockAllocator.cpp \
     $$PWD/Dynamics/Contacts/b2PolygonContact.cpp \
     $$PWD/Dynamics/Contacts/b2PolygonAndCircleContact.cpp \
@@ -46,7 +47,14 @@ SOURCES += \
     $$PWD/Dynamics/b2ContactManager.cpp \
     $$PWD/Dynamics/b2Body.cpp \
     $$PWD/Rope/b2Rope.cpp \
-    $$PWD/Dynamics/Joints/b2MotorJoint.cpp
+    $$PWD/Dynamics/Joints/b2MotorJoint.cpp \
+    $$PWD/Particle/b2Particle.cpp \
+    $$PWD/Particle/b2ParticleAssembly.cpp \
+    $$PWD/Particle/b2ParticleGroup.cpp \
+    $$PWD/Particle/b2ParticleSystem.cpp \
+    $$PWD/Particle/b2VoronoiDiagram.cpp \
+    $$PWD/Common/b2FreeList.cpp \
+    $$PWD/Common/b2Stat.cpp
 
 HEADERS += \
         $$PWD/Box2D.h \
@@ -66,6 +74,7 @@ HEADERS += \
     $$PWD/Common/b2Math.h \
     $$PWD/Common/b2GrowableStack.h \
     $$PWD/Common/b2Draw.h \
+    $$PWD/Common/b2TrackedBlock.h \
     $$PWD/Common/b2BlockAllocator.h \
     $$PWD/Dynamics/Contacts/b2PolygonContact.h \
     $$PWD/Dynamics/Contacts/b2PolygonAndCircleContact.h \
@@ -95,4 +104,15 @@ HEADERS += \
     $$PWD/Dynamics/b2ContactManager.h \
     $$PWD/Dynamics/b2Body.h \
     $$PWD/Rope/b2Rope.h \
-    $$PWD/Dynamics/Joints/b2MotorJoint.h
+    $$PWD/Dynamics/Joints/b2MotorJoint.h \
+    $$PWD/Particle/b2Particle.h \
+    $$PWD/Particle/b2ParticleAssembly.h \
+    $$PWD/Particle/b2ParticleGroup.h \
+    $$PWD/Particle/b2ParticleSystem.h \
+    $$PWD/Particle/b2StackQueue.h \
+    $$PWD/Particle/b2VoronoiDiagram.h \
+    $$PWD/Common/b2FreeList.h \
+    $$PWD/Common/b2GrowableBuffer.h \
+    $$PWD/Common/b2IntrusiveList.h \
+    $$PWD/Common/b2SlabAllocator.h \
+    $$PWD/Common/b2Stat.h

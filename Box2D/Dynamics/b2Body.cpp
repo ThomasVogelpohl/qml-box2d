@@ -1,5 +1,6 @@
 /*
 * Copyright (c) 2006-2007 Erin Catto http://www.box2d.org
+* Copyright (c) 2013 Google, Inc.
 *
 * This software is provided 'as-is', without any express or implied
 * warranty.  In no event will the authors be held liable for any damages
@@ -58,6 +59,7 @@ b2Body::b2Body(const b2BodyDef* bd, b2World* world)
 
 	m_xf.p = bd->position;
 	m_xf.q.Set(bd->angle);
+	m_xf0 = m_xf;
 
 	m_sweep.localCenter.SetZero();
 	m_sweep.c0 = m_xf.p;
@@ -213,6 +215,11 @@ b2Fixture* b2Body::CreateFixture(const b2Shape* shape, float32 density)
 
 void b2Body::DestroyFixture(b2Fixture* fixture)
 {
+	if (fixture == nullptr)
+	{
+		return;
+	}
+
 	b2Assert(m_world->IsLocked() == false);
 	if (m_world->IsLocked() == true)
 	{
@@ -224,13 +231,17 @@ void b2Body::DestroyFixture(b2Fixture* fixture)
 	// Remove the fixture from this body's singly linked list.
 	b2Assert(m_fixtureCount > 0);
 	b2Fixture** node = &m_fixtureList;
+#if B2_ASSERT_ENABLED
 	bool found = false;
+#endif // B2_ASSERT_ENABLED
 	while (*node != NULL)
 	{
 		if (*node == fixture)
 		{
 			*node = fixture->m_next;
+#if B2_ASSERT_ENABLED
 			found = true;
+#endif // B2_ASSERT_ENABLED
 			break;
 		}
 
@@ -266,9 +277,9 @@ void b2Body::DestroyFixture(b2Fixture* fixture)
 		fixture->DestroyProxies(broadPhase);
 	}
 
-	fixture->Destroy(allocator);
 	fixture->m_body = NULL;
 	fixture->m_next = NULL;
+	fixture->Destroy(allocator);
 	fixture->~b2Fixture();
 	allocator->Free(fixture, sizeof(b2Fixture));
 
@@ -424,6 +435,7 @@ void b2Body::SetTransform(const b2Vec2& position, float32 angle)
 
 	m_xf.q.Set(angle);
 	m_xf.p = position;
+	m_xf0 = m_xf;
 
 	m_sweep.c = b2Mul(m_xf, m_sweep.localCenter);
 	m_sweep.a = angle;

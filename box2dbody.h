@@ -142,6 +142,7 @@ public:
 
     bool transformDirty() const;
     void updateTransform();
+    void followTarget();
 
 signals:
     void worldChanged();

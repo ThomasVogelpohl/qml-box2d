@@ -102,6 +102,10 @@ Window {
             path: "rope/main.qml"
         }
         ListElement {
+            name: "wavemachine"
+            path: "wavemachine/wavemachine.qml"
+        }
+        ListElement {
             name: "weld"
             path: "weld/main.qml"
         }

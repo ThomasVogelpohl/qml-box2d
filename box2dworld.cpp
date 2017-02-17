@@ -295,11 +295,26 @@ void Box2DWorld::step()
     // Update Box2D state before stepping
     for (b2Body *body = mWorld.GetBodyList(); body; body = body->GetNext()) {
         Box2DBody *b = toBox2DBody(body);
-        if (b->transformDirty() && b->isActive())
-            b->updateTransform();
+        if (b->transformDirty() && b->isActive()) {
+            if (b->bodyType() != Box2DBody::Kinematic) {
+                b->updateTransform();
+            } else {
+                b->followTarget();
+            }
+        }
     }
 
     mWorld.Step(mTimeStep, mVelocityIterations, mPositionIterations);
+
+    for (b2Body *body = mWorld.GetBodyList(); body; body = body->GetNext()) {
+        Box2DBody *b = toBox2DBody(body);
+        if (b->isActive()) {
+            if (b->bodyType() == Box2DBody::Kinematic) {
+                b->setLinearVelocity(QPointF());
+                b->setAngularVelocity(0);
+            }
+        }
+    }
 
     b2Timer timer;
 

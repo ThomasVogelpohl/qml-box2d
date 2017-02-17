@@ -173,7 +173,7 @@ float Box2DWheelJoint::getJointTranslation() const
 float Box2DWheelJoint::getJointSpeed() const
 {
     if (wheelJoint())
-        return wheelJoint()->GetJointSpeed();
+        return wheelJoint()->GetJointAngularSpeed();
     return 0;
 }
 
